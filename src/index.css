@@ -1,0 +1,150 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color: #17231f;
+  background: #fbfcfd;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+  scroll-padding-top: 116px;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  font-family: Inter, system-ui, sans-serif;
+  background: #fbfcfd;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+[id] {
+  scroll-margin-top: 116px;
+}
+
+::selection {
+  background: rgba(184, 111, 82, 0.24);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 620ms cubic-bezier(0.22, 1, 0.36, 1), transform 620ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 {
+  transition-delay: 100ms;
+}
+
+.delay-2 {
+  transition-delay: 180ms;
+}
+
+.delay-3 {
+  transition-delay: 260ms;
+}
+
+.stagger > .reveal:nth-child(2) {
+  transition-delay: 60ms;
+}
+
+.stagger > .reveal:nth-child(3) {
+  transition-delay: 110ms;
+}
+
+.stagger > .reveal:nth-child(4) {
+  transition-delay: 160ms;
+}
+
+.stagger > .reveal:nth-child(5) {
+  transition-delay: 210ms;
+}
+
+.stagger > .reveal:nth-child(6) {
+  transition-delay: 260ms;
+}
+
+.scroll-drift {
+  transform-origin: center bottom;
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link::after {
+  background: #d89b5a;
+  bottom: -8px;
+  content: "";
+  height: 2px;
+  left: 0;
+  position: absolute;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+  width: 100%;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+@supports (animation-timeline: view()) {
+  .scroll-drift {
+    animation: settle-on-scroll both ease-out;
+    animation-timeline: view();
+    animation-range: entry 0% cover 42%;
+  }
+}
+
+@keyframes settle-on-scroll {
+  from {
+    opacity: 0.82;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    scroll-behavior: auto;
+  }
+
+  .reveal,
+  .reveal.is-visible,
+  * {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (max-width: 640px) {
+  :root {
+    scroll-padding-top: 92px;
+  }
+
+  [id] {
+    scroll-margin-top: 92px;
+  }
+}
